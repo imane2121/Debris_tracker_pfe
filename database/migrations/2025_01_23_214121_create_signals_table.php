@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('volume')->default(0);
             $table->json('wasteTypes');
             $table->string('location');
+            $table->string('customType');
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
             $table->boolean('anomalyFlag')->default(false);

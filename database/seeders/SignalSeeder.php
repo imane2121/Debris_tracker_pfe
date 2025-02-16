@@ -15,6 +15,7 @@ class SignalSeeder extends Seeder
             'location' => 'Plage de Rabat', // Moroccan location
             'latitude' => 34.020882, // Latitude of Rabat beach
             'longitude' => -6.841650, // Longitude of Rabat beach
+            'customType' => 'petrole',
             'status' => 'pending', // Signal status
             'anomalyFlag' => false, // No anomaly
         ]);
@@ -27,6 +28,7 @@ class SignalSeeder extends Seeder
             'latitude' => 33.573110, // Latitude of Casablanca beach
             'longitude' => -7.589843, // Longitude of Casablanca beach
             'status' => 'validated', // Signal status
+            'customType' => 'petrole',
             'anomalyFlag' => false, // No anomaly
         ]);
 
@@ -38,6 +40,7 @@ class SignalSeeder extends Seeder
             'latitude' => 30.427755, // Latitude of Agadir beach
             'longitude' => -9.598107, // Longitude of Agadir beach
             'status' => 'pending', // Signal status
+            'customType' => 'petrole',
             'anomalyFlag' => true, // Flagged for anomaly
         ]);
     }
