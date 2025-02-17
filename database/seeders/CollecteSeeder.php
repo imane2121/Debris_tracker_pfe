@@ -8,7 +8,7 @@ class CollecteSeeder extends Seeder
     public function run()
     {
         Collecte::create([
-            'signal_id' => 1, // Link to a signal
+            'signal_id' => 4, // Link to a signal
             'collecte_supervisor_id' => 1, // Supervisor ID
             'region' => 'Rabat-Salé-Kénitra', // Moroccan region
             'location' => 'Plage de Rabat', // Moroccan location
@@ -18,7 +18,7 @@ class CollecteSeeder extends Seeder
         ]);
 
         Collecte::create([
-            'signal_id' => 2, // Link to a signal
+            'signal_id' => 6, // Link to a signal
             'collecte_supervisor_id' => 1, // Supervisor ID
             'region' => 'Casablanca-Settat', // Moroccan region
             'location' => 'Plage de Casablanca', // Moroccan location
@@ -28,10 +28,10 @@ class CollecteSeeder extends Seeder
         ]);
 
         Collecte::create([
-            'signal_id' => 3, // Link to a signal
+            'signal_id' => 5, // Link to a signal
             'collecte_supervisor_id' => 2, // Supervisor ID
             'region' => 'Souss-Massa', // Moroccan region
-            'location' => 'Plage d\'Agadir', // Moroccan location
+            'location' => 'Plage dAgadir', // Moroccan location
             'status' => 'in_progress', // Collecte status
             'starting_date' => now()->addDays(7), // Starting date
             'end_date' => now()->addDays(9), // End date

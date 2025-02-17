@@ -8,17 +8,7 @@ class SignalSeeder extends Seeder
     public function run()
     {
         // Example signals focused on Morocco
-        Signal::create([
-            'contributorId' => 1, // Contributor ID
-            'volume' => 10, // Estimated volume of waste
-            'wasteTypes' => json_encode([6, 7]), // IDs of specific waste types (e.g., Bouteilles en plastique, Emballages alimentaires)
-            'location' => 'Plage de Rabat', // Moroccan location
-            'latitude' => 34.020882, // Latitude of Rabat beach
-            'longitude' => -6.841650, // Longitude of Rabat beach
-            'customType' => 'petrole',
-            'status' => 'pending', // Signal status
-            'anomalyFlag' => false, // No anomaly
-        ]);
+    
 
         Signal::create([
             'contributorId' => 2, // Contributor ID
@@ -40,8 +30,44 @@ class SignalSeeder extends Seeder
             'latitude' => 30.427755, // Latitude of Agadir beach
             'longitude' => -9.598107, // Longitude of Agadir beach
             'status' => 'pending', // Signal status
-            'customType' => 'petrole',
+            'customType' => 'validated',
             'anomalyFlag' => true, // Flagged for anomaly
         ]);
+        Signal::create([
+            'contributorId' => 4, 
+            'volume' => 12, 
+            'wasteTypes' => json_encode([17, 18]), 
+            'location' => 'Plage de Taghazout, Agadir', 
+            'latitude' => 30.545100, 
+            'longitude' => -9.712400, 
+            'customType' => 'petrole',
+            'status' => 'validated', 
+            'anomalyFlag' => true, 
+        ]);
+
+        Signal::create([
+            'contributorId' => 6, 
+            'volume' => 8, 
+            'wasteTypes' => json_encode([3, 5]), 
+            'location' => 'Plage de Saïdia', 
+            'latitude' => 35.107600, 
+            'longitude' => -2.249720, 
+            'customType' => 'petrole',
+            'status' => 'validated', 
+            'anomalyFlag' => false, 
+        ]);
+
+        Signal::create([
+            'contributorId' => 5, 
+            'volume' => 20, 
+            'wasteTypes' => json_encode([1, 9]), 
+            'location' => 'Plage de Dakhla', 
+            'latitude' => 23.688000, 
+            'longitude' => -15.948000, 
+            'customType' => 'petrole',
+            'status' => 'validated', 
+            'anomalyFlag' => true, 
+        ]);
+    
     }
 }

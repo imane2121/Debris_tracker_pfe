@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Score extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'scoreCollecte', 'scoreSignal', 'contributorId', 'awardedAt',
+    ];
+
+    public function contributor()
+    {
+        return $this->belongsTo(Contributor::class, 'contributorId');
+    }
 }

@@ -1,19 +1,20 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+// Routes for login and registration
+Route::get('login', [UserController::class, 'login'])->name('login');
+Route::post('login', [UserController::class, 'login'])->name('login.submit');
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('register', [UserController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [UserController::class, 'register'])->name('register.submit');
+
+// Admin routes (only accessible to authenticated users)
+Route::middleware('auth')->group(function () {
+    // Routes for admin managing users
+    Route::get('admin/pending', [AdminController::class, 'showPendingCollecteSupervisors'])->name('admin.pending');
+    Route::post('admin/approve/{userId}', [AdminController::class, 'approveCollecteSupervisor'])->name('admin.approve');
+    Route::post('admin/reject/{userId}', [AdminController::class, 'rejectCollecteSupervisor'])->name('admin.reject');
 });

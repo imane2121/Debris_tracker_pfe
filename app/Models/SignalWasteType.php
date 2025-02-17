@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class SignalWasteType extends Model
+class SignalWasteType extends Pivot
 {
-    use HasFactory;
+    protected $table = 'signal_waste_type';
+
+    public $timestamps = false;  // Since this is a pivot table, we don't need timestamps here
 }

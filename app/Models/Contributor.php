@@ -4,42 +4,34 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 
 class Contributor extends Model
 {
+    use HasFactory;
+
+    protected $table = 'contributors';  // Explicitly define the table name
+
+
     protected $fillable = [
-        'fullName', 'email', 'phoneNumber', 'password', 'username', 
-        'accountStatus', 'profilePicture', 'credibilityScore'
+        'firstName', 'lastName', 'email', 'phoneNumber', 'password', 'username', 'accountStatus', 'profilePicture', 'credibilityScore',
     ];
 
-    // A Contributor can create many Signals
+    // Validation rules
+    public static $rules = [
+        'phoneNumber' => ['required', 'string', 'min:10', 'max:10'],
+        'email' => ['required', 'email'],
+        'password' => ['required', 'string', 'min:8', 'confirmed'],
+        'username' => ['required', 'string', 'unique:contributors,username'],
+    ];
+
     public function signals()
     {
         return $this->hasMany(Signal::class, 'contributorId');
     }
 
-    // A Contributor can participate in multiple Chats
-    public function chatMemberships()
+    public function scores()
     {
-        return $this->hasMany(ChatMembers::class, 'userId')->where('userType', 'Contributor');
-    }
-
-    // A Contributor can send multiple Messages
-    public function messages()
-    {
-        return $this->hasMany(Message::class, 'senderId')->where('senderType', 'Contributor');
-    }
-
-    // A Contributor has a single Score
-    public function score()
-    {
-        return $this->hasOne(Score::class, 'contributorId');
-    }
-
-    // A Contributor can participate in multiple Reports
-    public function reports()
-    {
-        return $this->belongsToMany(Report::class, 'report_participants', 'contributorId', 'reportId');
+        return $this->hasMany(Score::class, 'contributorId');
     }
 }
-

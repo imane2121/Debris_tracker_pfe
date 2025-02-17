@@ -13,24 +13,24 @@ class ContributorSeeder extends Seeder
     public function run()
     {
         Contributor::create([
-            'firstName' => 'John',
-            'lastName' => 'Doe',
-            'email' => 'john.doe@example.com',
+            'firstName' => 'Imane',
+            'lastName' => 'El markhi',
+            'email' => 'imane11@gmail.com',
             'phoneNumber' => '1234567890',
             'password' => bcrypt('password123'),
-            'username' => 'johndoe',
+            'username' => 'Faith',
             'accountStatus' => 'active',
             'profilePicture' => 'profile.jpg',
             'credibilityScore' => 95.50,
         ]);
 
         Contributor::create([
-            'firstName' => 'Jane',
-            'lastName' => 'Smith',
-            'email' => 'jane.smith@example.com',
+            'firstName' => 'nouhaila',
+            'lastName' => 'ghandour',
+            'email' => 'nouhaila1@gmail.com',
             'phoneNumber' => '0987654321',
             'password' => bcrypt('password123'),
-            'username' => 'janesmith',
+            'username' => 'nounou',
             'accountStatus' => 'active',
             'profilePicture' => 'profile.jpg',
             'credibilityScore' => 85.00,

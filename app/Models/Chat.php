@@ -7,10 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Chat extends Model
 {
-    public function users()
+    use HasFactory;
+
+    protected $fillable = [
+        'user_one_id',
+        'user_two_id',
+        'collecte_id',
+    ];
+
+    public function collecte()
     {
-        return $this->belongsToMany(User::class, 'chat_members')
-                    ->withPivot('user_type')  // to include the user_type in the pivot table
-                    ->withTimestamps(); // automatically manage timestamps
+        return $this->belongsTo(Collecte::class);
     }
 }

@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Organisation extends Model
+class Region extends Model
 {
     use HasFactory;
 
     protected $fillable = ['name'];
 
-    public function collecteSupervisors()
+    public function collectes()
     {
-        return $this->hasMany(CollecteSupervisor::class);
+        return $this->hasMany(Collecte::class);
     }
 }
