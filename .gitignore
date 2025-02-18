@@ -11,6 +11,7 @@
 *.log
 *.sql
 *.sqlite
+*.ibd
 
 # Laravel 4 specific
 bootstrap/compiled.php
@@ -37,3 +38,4 @@ yarn-error.log
 /.vagrant
 .phpactor.json
 /storage/pail
+"*.ibd" 
