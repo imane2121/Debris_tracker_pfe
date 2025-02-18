@@ -8,7 +8,7 @@ class MediaSeeder extends Seeder
     public function run()
     {
         Media::create([
-            'signal_id' => 1, // Link to a signal
+            'signal_id' => 3, // Link to a signal
             'type' => 'photo', // Media type
             'url' => 'https://example.com/photo1.jpg', // URL of the media
         ]);

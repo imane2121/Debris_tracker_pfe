@@ -9,13 +9,13 @@ class ChatMembersSeeder extends Seeder
     public function run()
     {
         ChatMembers::create([
-            'chat_id' => 1,
+            'chat_id' => 2,
             'user_id' => 1, // Supervisor/Admin
             'user_type' => 'Supervisor',
         ]);
 
         ChatMembers::create([
-            'chat_id' => 1,
+            'chat_id' => 2,
             'user_id' => 2, // Contributor
             'user_type' => 'Contributor',
         ]);

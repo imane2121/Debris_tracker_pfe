@@ -16,14 +16,14 @@ class ChatSeeder extends Seeder
         Chat::create([
             'user_one_id' => 1, // Provide a valid user ID for user_one
             'user_two_id' => 2, // Provide a valid user ID for user_two
-            'collecte_id' => 3, // Link to a collecte
+            'collecte_id' => 8, // Link to a collecte
         ]);
 
         // Example 2: Inserting another chat
         Chat::create([
             'user_one_id' => 1, // Provide a valid user ID for user_one
             'user_two_id' => 3, // Provide a valid user ID for user_two
-            'collecte_id' => 2, // Link to a collecte
+            'collecte_id' => 7, // Link to a collecte
         ]);
     }
 }

@@ -10,7 +10,7 @@ class ReportSeeder extends Seeder
     public function run()
     {
         Report::create([
-            'collecte_id' => 3, // Link to a collecte
+            'collecte_id' => 2, // Link to a collecte
             'waste_types' => json_encode([6, 7]), // IDs of specific waste types
             'volume' => 10, // Volume of waste collected
             'starting_date' => now(), // Starting date
@@ -23,7 +23,7 @@ class ReportSeeder extends Seeder
         ]);
 
         Report::create([
-            'collecte_id' => 2, // Link to a collecte
+            'collecte_id' => 3, // Link to a collecte
             'waste_types' => json_encode([10, 12]), // IDs of specific waste types
             'volume' => 5, // Volume of waste collected
             'starting_date' => now()->subDays(5), // Starting date
