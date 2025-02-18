@@ -98,7 +98,6 @@
             <div class="form-group">
               <label for="material">Select Material</label>
               <select id="material" name="material">
-                <option value="" disabled selected>Choose a material</option>
                 <option value="plastiques">Plastics</option>
                 <option value="metaux">Metals</option>
                 <option value="verre">Glass</option>
