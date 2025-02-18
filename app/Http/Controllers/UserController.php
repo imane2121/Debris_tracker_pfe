@@ -21,6 +21,8 @@ class UserController extends Controller
         'lastName' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:users',
         'password' => 'required|string|confirmed|min:8',
+        'identity_card_recto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        'identity_card_verso' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         'role' => 'required|in:contributor,collecte_supervisor',
         // Add validation rules for other attributes here
     ]);

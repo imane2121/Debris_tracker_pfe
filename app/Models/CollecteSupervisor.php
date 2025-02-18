@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CollecteSupervisor extends Model
 {
     use HasFactory;
+    protected $table = 'collecte_supervisors';  // Explicitly define the table name
 
     protected $fillable = [
         'firstName',
@@ -16,6 +17,7 @@ class CollecteSupervisor extends Model
         'password',
         'accountStatus',
         'CNI',
+        'identityCard',
         'profilePicture',
         'organisation',
         'region',
@@ -25,4 +27,7 @@ class CollecteSupervisor extends Model
     {
         return $this->hasMany(Collecte::class);
     }
+    protected $casts = [
+        'identityCard' => 'array', // Laravel will automatically decode JSON to an array
+    ];
 }
