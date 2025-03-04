@@ -1,3 +1,25 @@
+document.addEventListener("DOMContentLoaded", function () {
+  const shareButtons = document.querySelectorAll(".share-dropdown .share-button");
+
+  shareButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      const dropdownMenu = button.closest(".share-dropdown").querySelector(".dropdown-menu");
+      dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+    });
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".share-dropdown")) {
+      const dropdowns = document.querySelectorAll(".share-dropdown .dropdown-menu");
+      dropdowns.forEach((dropdown) => {
+        dropdown.style.display = "none";
+      });
+    }
+  });
+});
+
 // script.js
 document.addEventListener("DOMContentLoaded", function () {
   const navLinks = document.querySelectorAll(".account-nav-link");

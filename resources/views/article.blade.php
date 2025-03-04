@@ -4,13 +4,13 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>AquaScan - sign in</title>
-  <meta name="description" content="">
+  <title>AquaScan - {{ $article->title }}</title>
+  <meta name="description" content="{{ Str::limit($article->content, 150, '...') }}">
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="assets/img/apple-touch-icon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icobn">
+  <link href="/assets/img/apple-touch-icon.png" rel="icon">
+  <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -18,14 +18,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="/assets/css/main.css" rel="stylesheet">
 </head>
 
 <body class="starter-page-page">
@@ -34,7 +34,7 @@
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
       <a href="{{ route('overview') }}" class="logo d-flex align-items-center">
-        <img src="assets/img/apple-touch-icon.png" alt="">
+        <img src="/assets/img/apple-touch-icon.png" alt="">
         <h1 class="sitename">AquaScan</h1>
       </a>
 
@@ -86,50 +86,29 @@
 
           <div class="col-lg-8">
             <div class="portfolio-details-slider swiper init-swiper">
-
-              <script type="application/json" class="swiper-config">
-                {
-                  "loop": true,
-                  "speed": 600,
-                  "autoplay": {
-                    "delay": 5000
-                  },
-                  "slidesPerView": "auto",
-                  "pagination": {
-                    "el": ".swiper-pagination",
-                    "type": "bullets",
-                    "clickable": true
-                  }
-                }
-              </script>
-
-              <div class="swiper-wrapper align-items-center">
-
-                <div class="swiper-slide">
-                  <img src="assets/img/portfolio/app-1.jpg" alt="">
+                <div class="swiper-wrapper align-items-center">
+                    @if ($article->image)
+                        <div class="swiper-slide">
+                            <img src="{{ asset('assets/img/articles/' . $article->image) }}" alt="{{ $article->title }}">
+                        </div>
+                    @else
+                        <div class="swiper-slide">
+                            <img src="{{ asset('assets/img/portfolio/app-1.jpg') }}" alt="No Image">
+                        </div>
+                    @endif
                 </div>
-
-              </div>
-              <div class="swiper-pagination"></div>
+                <div class="swiper-pagination"></div>
             </div>
-          </div>
+        </div>
 
           <div class="col-lg-4">
-            <!--<div class="portfolio-info" data-aos="fade-up" data-aos-delay="200">
-              <h3>Project information</h3>
-              <ul>
-                <li><strong>Category</strong>: Web design</li>
-                <li><strong>Client</strong>: ASU Company</li>
-                <li><strong>Project date</strong>: 01 March, 2020</li>
-                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
-              </ul>
-            </div>-->
             <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
-              <h2>The Hidden World of Coral Reefs</h2>
-              <p>
-                Hidden beneath the ocean’s surface, coral reefs are among the most diverse and essential ecosystems on Earth. Built by tiny coral polyps over centuries, they provide shelter and breeding grounds for nearly a quarter of all marine species, despite occupying less than one percent of the ocean floor. These underwater cities support fisheries, protect coastlines from storms, and play a role in maintaining the planet’s carbon balance.
-
-                However, coral reefs face growing threats from climate change, pollution, and overfishing. Rising sea temperatures cause coral bleaching, weakening marine ecosystems and endangering countless species. Conservation efforts, such as coral farming and marine protected areas, aim to restore and protect these fragile environments. Individuals can also contribute by reducing plastic waste, choosing sustainable seafood, and supporting reef conservation initiatives. Safeguarding coral reefs is not just about preserving their beauty but ensuring the health of our oceans and future generations.              </p>
+              <h2>{{ $article->title }}</h2>
+              <p><strong>Author:</strong> {{ $article->author }}</p>
+              <p><strong>Category:</strong> {{ $article->category }}</p>
+              <p><strong>Published:</strong> {{ $article->published_at->format('M d, Y') }}</p>
+              <hr>
+              <p>{{ $article->content }}</p>
             </div>
           </div>
 
@@ -201,18 +180,18 @@
   <div id="preloader"></div>
 
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/vendor/php-email-form/validate.js"></script>
+  <script src="/assets/vendor/aos/aos.js"></script>
+  <script src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
 
   <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="/assets/js/main.js"></script>
 
 </body>
 
-</html>       
+</html>

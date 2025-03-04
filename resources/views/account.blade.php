@@ -67,142 +67,185 @@
     </div>
   </header>
 
-    <main class="account-settings-container">
-      <!-- Sidebar Navigation -->
-          <!-- Page Title -->
-    <div class="page-title accent-background">
-      <div class="container position-relative">
+      <!-- Page Title -->
+      <div class="page-title accent-background">
+        <div class="container position-relative">
           <nav class="breadcrumbs">
-        </nav>
-      </div>
-    </div><!-- End Page Title -->
-    
-      <aside class="account-sidebar">
-        <nav>
-          <ul>
-            <li><a href="#profile" class="account-nav-link active">Profile</a></li>
-            <li><a href="#security" class="account-nav-link">Security</a></li>
-            <li><a href="#notifications" class="account-nav-link">Notifications</a></li>
-            <li><a href="#rewards" class="account-nav-link">Rewards</a></li>
-            <li><a href="#community" class="account-nav-link">Community</a></li>
-          </ul>
-        </nav>
-      </aside>
-  
-      <!-- Main Content Area -->
-      <section class="account-content">
-        <!-- Profile Section -->
-        <div id="profile" class="account-section active">
-          <h2 class="account-section-title">Profile Settings</h2>
-          <form class="account-form profile-form">
-            <div class="account-form-group">
-              <label for="username" class="account-form-label">Username</label>
-              <input type="text" id="username" class="account-form-input" value="EcoWarrior123" readonly>
-            </div>
-            <div class="account-form-group">
-              <label for="email" class="account-form-label">Email</label>
-              <input type="email" id="email" class="account-form-input" value="ecowarrior@example.com">
-            </div>
-            <div class="account-form-group">
-              <label for="bio" class="account-form-label">Bio</label>
-              <textarea id="bio" class="account-form-input" rows="4">Helping to clean the oceans, one piece of trash at a time!</textarea>
-            </div>
-            <button type="submit" class="account-button save-button">Save Changes</button>
-          </form>
+          </nav>
         </div>
-  
-        <!-- Security Section -->
-        <div id="security" class="account-section">
-          <h2 class="account-section-title">Security Settings</h2>
-          <form class="account-form security-form">
-            <div class="account-form-group">
-              <label for="current-password" class="account-form-label">Current Password</label>
-              <input type="password" id="current-password" class="account-form-input">
-            </div>
-            <div class="account-form-group">
-              <label for="new-password" class="account-form-label">New Password</label>
-              <input type="password" id="new-password" class="account-form-input">
-            </div>
-            <div class="account-form-group">
-              <label for="confirm-password" class="account-form-label">Confirm New Password</label>
-              <input type="password" id="confirm-password" class="account-form-input">
-            </div>
-            <button type="submit" class="account-button save-button">Update Password</button>
-          </form>
-        </div>
-  
-        <!-- Notifications Section -->
-        <div id="notifications" class="account-section">
-          <h2 class="account-section-title">Notification Preferences</h2>
-          <form class="account-form notifications-form">
-            <div class="account-form-group">
-              <label class="account-form-label">
-                <input type="checkbox" class="account-form-checkbox" checked> Receive email notifications
-              </label>
-            </div>
-            <div class="account-form-group">
-              <label class="account-form-label">
-                <input type="checkbox" class="account-form-checkbox" checked> Receive SMS notifications
-              </label>
-            </div>
-            <div class="account-form-group">
-              <label class="account-form-label">
-                <input type="checkbox" class="account-form-checkbox"> Receive community updates
-              </label>
-            </div>
-            <button type="submit" class="account-button save-button">Save Preferences</button>
-          </form>
-        </div>
-  
-        <!-- Rewards Section -->
-        <div id="rewards" class="account-section">
-          <h2 class="account-section-title">Your Rewards</h2>
-          <div class="account-rewards-dashboard">
-            <div class="account-reward-card">
-              <h3 class="account-reward-title">Total Points</h3>
-              <p class="account-reward-points">1,250</p>
-              <p class="account-reward-description">Keep contributing to earn more!</p>
-            </div>
-            <div class="account-reward-card">
-              <h3 class="account-reward-title">Badges Earned</h3>
-              <div class="account-badges">
-                <span class="account-badge">🌊 Ocean Hero</span>
-                <span class="account-badge">♻️ Eco Champion</span>
-                <span class="account-badge">🏆 Top Contributor</span>
+      </div><!-- End Page Title -->
+
+      <main class="account-settings-container">
+        <!-- Sidebar Navigation -->
+        <aside class="account-sidebar">
+          <nav>
+            <ul>
+              <li><a href="#profile" class="account-nav-link active">Profile</a></li>
+              <li><a href="#security" class="account-nav-link">Security</a></li>
+              <li><a href="#privacy" class="account-nav-link">Privacy</a></li>
+              <li><a href="#notifications" class="account-nav-link">Notifications</a></li>
+              <li><a href="#language" class="account-nav-link">Language</a></li>
+              <li><a href="#rewards" class="account-nav-link">Rewards</a></li>
+              <li><a href="#community" class="account-nav-link">Community</a></li>
+            </ul>
+          </nav>
+        </aside>
+      
+        <!-- Main Content Area -->
+        <section class="account-content">
+          <!-- Profile Section -->
+          <div id="profile" class="account-section active">
+            <h2 class="account-section-title">Profile Settings</h2>
+            <form class="account-form profile-form">
+              <div class="account-form-group">
+                <label for="profile-picture" class="account-form-label">Profile Picture</label>
+                <div class="account-profile-picture">
+                  <img src="https://via.placeholder.com/150" alt="Profile Picture" class="account-profile-img">
+                  <input type="file" id="profile-picture" class="account-form-input" accept="image/*">
+                </div>
+              </div>
+              <div class="account-form-group">
+                <label for="username" class="account-form-label">Username</label>
+                <input type="text" id="username" class="account-form-input" value="Example123" readonly>
+              </div>
+              <div class="account-form-group">
+                <label for="email" class="account-form-label">Email</label>
+                <input type="text" id="email" class="account-form-input" value="Example123@gmail.com" readonly>
+              </div>
+              <button type="submit" class="account-button save-button">Save Changes</button>
+            </form>
+          </div>
+      
+          <!-- Security Section -->
+          <div id="security" class="account-section">
+            <h2 class="account-section-title">Security Settings</h2>
+            <form class="account-form security-form">
+              <div class="account-form-group">
+                <label for="current-password" class="account-form-label">Current Password</label>
+                <input type="text" id="current-password" class="account-form-input">
+              </div>
+              <div class="account-form-group">
+                <label for="new-password" class="account-form-label">New Password</label>
+                <input type="text" id="new-password" class="account-form-input">
+              </div>
+              <div class="account-form-group">
+                <label for="confirm-password" class="account-form-label">Confirm New Password</label>
+                <input type="text" id="confirm-password" class="account-form-input">
+              </div>
+              <button type="submit" class="account-button save-button">Update Password</button>
+            </form>
+          </div>
+      
+          <!-- Privacy Section -->
+          <div id="privacy" class="account-section">
+            <h2 class="account-section-title">Privacy Settings</h2>
+            <form class="account-form privacy-form">
+              <div class="account-form-group">
+                <label class="account-form-label">
+                  <input type="checkbox" class="account-form-checkbox" checked> Make profile public
+                </label>
+              </div>
+              <div class="account-form-group">
+                <label class="account-form-label">
+                  <input type="checkbox" class="account-form-checkbox" checked> Allow search engines to index my profile
+                </label>
+              </div>
+              <div class="account-form-group">
+                <label class="account-form-label">
+                  <input type="checkbox" class="account-form-checkbox"> Show my activity to other users
+                </label>
+              </div>
+              <button type="submit" class="account-button save-button">Save Preferences</button>
+            </form>
+          </div>
+      
+          <!-- Notifications Section -->
+          <div id="notifications" class="account-section">
+            <h2 class="account-section-title">Notification Preferences</h2>
+            <form class="account-form notifications-form">
+              <div class="account-form-group">
+                <label class="account-form-label">
+                  <input type="checkbox" class="account-form-checkbox" checked> Receive email notifications
+                </label>
+              </div>
+              <div class="account-form-group">
+                <label class="account-form-label">
+                  <input type="checkbox" class="account-form-checkbox" checked> Receive SMS notifications
+                </label>
+              </div>
+              <div class="account-form-group">
+                <label class="account-form-label">
+                  <input type="checkbox" class="account-form-checkbox"> Receive community updates
+                </label>
+              </div>
+              <button type="submit" class="account-button save-button">Save Preferences</button>
+            </form>
+          </div>
+      
+          <!-- Language Section -->
+          <div id="language" class="account-section">
+            <h2 class="account-section-title">Language Preferences</h2>
+            <form class="account-form language-form">
+              <div class="account-form-group">
+                <label for="language-select" class="account-form-label">Select Language</label>
+                <select id="language-select" class="account-form-input">
+                  <option value="en">English</option>
+                  <option value="fr">French</option>
+                  <option value="es">Spanish</option>
+                  <option value="de">German</option>
+                </select>
+              </div>
+              <button type="submit" class="account-button save-button">Save Language</button>
+            </form>
+          </div>
+      
+          <!-- Rewards Section -->
+          <div id="rewards" class="account-section">
+            <h2 class="account-section-title">Your Rewards</h2>
+            <div class="account-rewards-dashboard">
+              <div class="account-reward-card">
+                <h3 class="account-reward-title">Total Points</h3>
+                <p class="account-reward-points">1,250</p>
+                <p class="account-reward-description">Keep contributing to earn more!</p>
+              </div>
+              <div class="account-reward-card">
+                <h3 class="account-reward-title">Badges Earned</h3>
+                <div class="account-badges">
+                  <span class="account-badge">🌊 Ocean Hero</span>
+                  <span class="account-badge">♻️ Eco Champion</span>
+                  <span class="account-badge">🏆 Top Contributor</span>
+                </div>
+              </div>
+              <div class="account-reward-card">
+                <h3 class="account-reward-title">Recent Activity</h3>
+                <ul class="account-activity-list">
+                  <li>Reported 10 plastic bottles (+50 points)</li>
+                  <li>Cleaned a beach (+100 points)</li>
+                  <li>Shared on social media (+25 points)</li>
+                </ul>
               </div>
             </div>
-            <div class="account-reward-card">
-              <h3 class="account-reward-title">Recent Activity</h3>
-              <ul class="account-activity-list">
-                <li>Reported 10 plastic bottles (+50 points)</li>
-                <li>Cleaned a beach (+100 points)</li>
-                <li>Shared on social media (+25 points)</li>
-              </ul>
+          </div>
+      
+          <!-- Community Section -->
+          <div id="community" class="account-section">
+            <h2 class="account-section-title">Community Engagement</h2>
+            <div class="account-community-forum">
+              <h3 class="account-forum-title">Latest Discussions</h3>
+              <div class="account-forum-post">
+                <h4 class="account-forum-post-title">How to reduce microplastics?</h4>
+                <p class="account-forum-post-author">Posted by EcoFriend123</p>
+                <a href="#" class="account-forum-post-link">Join the discussion</a>
+              </div>
+              <div class="account-forum-post">
+                <h4 class="account-forum-post-title">Upcoming Beach Cleanup Event</h4>
+                <p class="account-forum-post-author">Posted by CleanOceanOrg</p>
+                <a href="#" class="account-forum-post-link">Learn more</a>
+              </div>
             </div>
           </div>
-        </div>
-  
-        <!-- Community Section -->
-        <div id="community" class="account-section">
-          <h2 class="account-section-title">Community Engagement</h2>
-          <div class="account-community-forum">
-            <h3 class="account-forum-title">Latest Discussions</h3>
-            <div class="account-forum-post">
-              <h4 class="account-forum-post-title">How to reduce microplastics?</h4>
-              <p class="account-forum-post-author">Posted by EcoFriend123</p>
-              <a href="#" class="account-forum-post-link">Join the discussion</a>
-            </div>
-            <div class="account-forum-post">
-              <h4 class="account-forum-post-title">Upcoming Beach Cleanup Event</h4>
-              <p class="account-forum-post-author">Posted by CleanOceanOrg</p>
-              <a href="#" class="account-forum-post-link">Learn more</a>
-            </div>
-          </div>
-        </div>
-      </section>
-    
-    
-  </main>
+        </section>
+      </main>
 
   <footer id="footer" class="footer dark-background">
 

@@ -23,7 +23,12 @@
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 
+<!-- Leaflet JS & Heatmap Plugin -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
@@ -52,23 +57,6 @@
           <li><a href="#cartography">Data</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="{{ route('signInWithEmail') }}">Log in</a></li>
-          <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="#">Dropdown 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">Deep Dropdown 1</a></li>
-                  <li><a href="#">Deep Dropdown 2</a></li>
-                  <li><a href="#">Deep Dropdown 3</a></li>
-                  <li><a href="#">Deep Dropdown 4</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Dropdown 2</a></li>
-              <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li>
-            </ul>
-          </li>
           <li><a href="#contact">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -92,8 +80,8 @@
 
     </section><!-- /Hero Section -->
 
-    <!-- Articles Section -->
- <section id="articles" class="portfolio section">
+<!-- Articles Section -->
+<section id="articles" class="portfolio section">
 
   <!-- Section Title -->
   <div class="container section-title" data-aos="fade-up">
@@ -107,81 +95,41 @@
 
       <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
         <li data-filter="*" class="filter-active">All</li>
-        <li data-filter=".filter-marine">Marine Life</li>
-        <li data-filter=".filter-pollution">Pollution</li>
-        <li data-filter=".filter-conservation">Conservation</li>
-        <li data-filter=".filter-cleanup">Cleanup Initiatives</li>
+        <li data-filter=".filter-news">News</li>
+        <li data-filter=".filter-event">Events</li>
+        <li data-filter=".filter-guideline">Guidline</li>
       </ul><!-- End Filters -->
 
       <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
-        <!-- Article 1 -->
-        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-marine">
-          <img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt="">
-          <div class="portfolio-info">
-            <h4>The Hidden World of Coral Reefs</h4>
-            <p>Explore the diverse ecosystem of coral reefs and their importance.</p>
-            <a href="assets/img/portfolio/app-1.jpg" title="The Hidden World of Coral Reefs" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="fas fa-share"></i></a>
-            <a href="{{ route('article') }}" title="The Hidden World of Coral Reefs" class="details-link"><i class="fas fa-ellipsis-h"></i></a>
-          </div>
-        </div><!-- End Article -->
-
-        <!-- Article 2 -->
-        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-pollution">
-          <img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt="">
-          <div class="portfolio-info">
-            <h4>How Plastic Waste Affects Marine Life</h4>
-            <p>Learn about the dangers of plastic pollution in our oceans.</p>
-            <a href="assets/img/portfolio/app-1.jpg" title="The Hidden World of Coral Reefs" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="fas fa-share"></i></a>
-            <a href="{{ route('article') }}" title="The Hidden World of Coral Reefs" class="details-link"><i class="fas fa-ellipsis-h"></i></a>
-          </div>
-        </div><!-- End Article -->
-
-        <!-- Article 3 -->
-        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-conservation">
-          <img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt="">
-          <div class="portfolio-info">
-            <h4>Saving Endangered Sea Turtles</h4>
-            <p>Discover efforts to protect sea turtles from extinction.</p>
-            <a href="assets/img/portfolio/app-1.jpg" title="The Hidden World of Coral Reefs" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="fas fa-share"></i></a>
-            <a href="{{ route('article') }}" title="The Hidden World of Coral Reefs" class="details-link"><i class="fas fa-ellipsis-h"></i></a>
-          </div>
-        </div><!-- End Article -->
-
-        <!-- Article 4 -->
-        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cleanup">
-          <img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt="">
-          <div class="portfolio-info">
-            <h4>Beach Cleanups: Do They Really Help?</h4>
-            <p>How small cleanup actions can make a big impact on our environment.</p>
-            <a href="assets/img/portfolio/app-1.jpg" title="The Hidden World of Coral Reefs" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="fas fa-share"></i></a>
-            <a href="{{ route('article') }}" title="The Hidden World of Coral Reefs" class="details-link"><i class="fas fa-ellipsis-h"></i></a>
-          </div>
-        </div><!-- End Article -->
-
-        <!-- Article 6 -->
-        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-marine">
-          <img src="assets/img/portfolio/product-2.jpg" class="img-fluid" alt="">
-          <div class="portfolio-info">
-            <h4>Fascinating Deep-Sea Creatures</h4>
-            <p>Meet some of the most unique creatures living in the deep ocean.</p>
-            <a href="assets/img/portfolio/app-1.jpg" title="The Hidden World of Coral Reefs" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="fas fa-share"></i></a>
-            <a href="{{ route('article') }}" title="The Hidden World of Coral Reefs" class="details-link"><i class="fas fa-ellipsis-h"></i></a>
-          </div>
-        </div><!-- End Article -->
-
-        <!-- Article 8 -->
-        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cleanup">
-          <img src="assets/img/portfolio/books-2.jpg" class="img-fluid" alt="">
-          <div class="portfolio-info">
-            <h4>How to Organize a Cleanup Event</h4>
-            <p>Step-by-step guide to organizing a successful beach or ocean cleanup.</p>
-            <a href="assets/img/portfolio/app-1.jpg" title="The Hidden World of Coral Reefs" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="fas fa-share"></i></a>
-            <a href="{{ route('article') }}" title="The Hidden World of Coral Reefs" class="details-link"><i class="fas fa-ellipsis-h"></i></a>
-          </div>
-        </div><!-- End Article -->
-
-      </div><!-- End Articles Container -->
+        <!-- Dynamic Articles Loop -->
+        @foreach ($articles as $article)
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-{{ strtolower($article->category) }}">
+                <!-- Dynamic Image -->
+                @if ($article->image)
+                    <img src="{{ asset('assets/img/articles/' . $article->image) }}" class="img-fluid" alt="{{ $article->title }}">
+                @else
+                    <!-- Fallback image if no image is available -->
+                    <img src="{{ asset('assets/img/portfolio/app-1.jpg') }}" class="img-fluid" alt="No Image">
+                @endif
+    
+                <div class="portfolio-info">
+                    <h4>{{ $article->title }}</h4>
+                    <p>{{ Str::limit($article->content, 100, '...') }}</p> <!-- Display first 100 characters of content -->
+                    
+                    <!-- Dynamic Preview Link -->
+                    @if ($article->image)
+                        <a href="{{ asset('assets/img/articles/' . $article->image) }}" title="{{ $article->title }}" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="fas fa-share"></i></a>
+                    @else
+                        <a href="{{ asset('assets/img/portfolio/app-1.jpg') }}" title="{{ $article->title }}" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="fas fa-share"></i></a>
+                    @endif
+                    
+                    <a href="{{ route('article', ['id' => $article->id]) }}" title="{{ $article->title }}" class="details-link"><i class="fas fa-ellipsis-h"></i></a>
+                </div>
+            </div><!-- End Article -->
+        @endforeach
+    
+    </div><!-- End Articles Container -->
 
     </div>
 
@@ -244,10 +192,10 @@
 
     </section>
 
-  <section id="cartography" class="about section">
+    <section id="cartography" class="about section">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Cartography</h2>
-        <p</p>
+          <h2>Cartography</h2>
+          <p>Heatmap of collectes based on signal locations.</p>
       </div>    
       <div class="map-container">
           <div id="map" class="map-box"></div>
@@ -267,17 +215,34 @@
           attribution: '© OpenStreetMap contributors'
       }).addTo(map);
   
-      // Example trash collection points in Moroccan seas (Replace with dynamic data later)
-      var trashPoints = [
-          [35.7556, -5.8333, 0.9],  // Near Tangier
-          [33.5333, -7.5833, 0.8],  // Near Casablanca
-          [30.4202, -9.5982, 0.7],  // Agadir area
-          [27.1500, -13.2000, 1.0]  // Near Dakhla
-      ];
+      // Fetch locations data from the backend
+      var locations = @json($locations);
+  
+      // Debug the locations data
+      console.log('Locations:', locations);
+  
+      // Prepare heatmap data
+      var heatmapData = locations.map(function(location) {
+          return [
+              parseFloat(location.latitude), // Convert latitude to number
+              parseFloat(location.longitude), // Convert longitude to number
+              1.0 // Intensity (can be adjusted based on your needs)
+          ];
+      });
+  
+      // Debug the heatmap data
+      console.log('Heatmap Data:', heatmapData);
   
       // Add heatmap layer
-      L.heatLayer(trashPoints, { radius: 25, blur: 20, maxZoom: 10 }).addTo(map);
+      if (heatmapData.length > 0) {
+          L.heatLayer(heatmapData, { radius: 25, blur: 20, maxZoom: 10 }).addTo(map);
+      } else {
+          console.error('No heatmap data available.');
+      }
   </script>
+  
+
+
     <!-- Services Section -->
     <section id="services" class="services section">
 

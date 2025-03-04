@@ -86,101 +86,61 @@
     
         </section><!-- /Hero Section -->
     
-    <!-- Articles Section -->
-    <section id="articles" class="portfolio section">
+<!-- Articles Section -->
+<section id="articles" class="portfolio section">
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>News</h2>
-        <p>Stay informed about marine life, ocean pollution, and conservation efforts.</p>
-      </div><!-- End Section Title -->
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <h2>News</h2>
+    <p>Stay informed about marine life, ocean pollution, and conservation efforts.</p>
+  </div><!-- End Section Title -->
+
+  <div class="container">
+
+    <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+      <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+        <li data-filter="*" class="filter-active">All</li>
+        <li data-filter=".filter-news">News</li>
+        <li data-filter=".filter-event">Events</li>
+        <li data-filter=".filter-guideline">Guidline</li>
+      </ul><!-- End Filters -->
+
+      <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
+        <!-- Dynamic Articles Loop -->
+        @foreach ($articles as $article)
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-{{ strtolower($article->category) }}">
+                <!-- Dynamic Image -->
+                @if ($article->image)
+                    <img src="{{ asset('assets/img/articles/' . $article->image) }}" class="img-fluid" alt="{{ $article->title }}">
+                @else
+                    <!-- Fallback image if no image is available -->
+                    <img src="{{ asset('assets/img/portfolio/app-1.jpg') }}" class="img-fluid" alt="No Image">
+                @endif
     
-      <div class="container">
-    
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-    
-          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-marine">Marine Life</li>
-            <li data-filter=".filter-pollution">Pollution</li>
-            <li data-filter=".filter-conservation">Conservation</li>
-            <li data-filter=".filter-cleanup">Cleanup Initiatives</li>
-          </ul><!-- End Filters -->
-    
-          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-    
-            <!-- Article 1 -->
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-marine">
-              <img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>The Hidden World of Coral Reefs</h4>
-                <p>Explore the diverse ecosystem of coral reefs and their importance.</p>
-                <a href="assets/img/portfolio/app-1.jpg" title="The Hidden World of Coral Reefs" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="fas fa-share"></i></a>
-                <a href="{{ route('article') }}" title="The Hidden World of Coral Reefs" class="details-link"><i class="fas fa-ellipsis-h"></i></a>
-              </div>
+                <div class="portfolio-info">
+                    <h4>{{ $article->title }}</h4>
+                    <p>{{ Str::limit($article->content, 100, '...') }}</p> <!-- Display first 100 characters of content -->
+                    
+                    <!-- Dynamic Preview Link -->
+                    @if ($article->image)
+                        <a href="{{ asset('assets/img/articles/' . $article->image) }}" title="{{ $article->title }}" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="fas fa-share"></i></a>
+                    @else
+                        <a href="{{ asset('assets/img/portfolio/app-1.jpg') }}" title="{{ $article->title }}" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="fas fa-share"></i></a>
+                    @endif
+                    
+                    <a href="{{ route('article', ['id' => $article->id]) }}" title="{{ $article->title }}" class="details-link"><i class="fas fa-ellipsis-h"></i></a>
+                </div>
             </div><!-- End Article -->
+        @endforeach
     
-            <!-- Article 2 -->
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-pollution">
-              <img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>How Plastic Waste Affects Marine Life</h4>
-                <p>Learn about the dangers of plastic pollution in our oceans.</p>
-                <a href="assets/img/portfolio/app-1.jpg" title="The Hidden World of Coral Reefs" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="fas fa-share"></i></a>
-                <a href="{{ route('article') }}" title="The Hidden World of Coral Reefs" class="details-link"><i class="fas fa-ellipsis-h"></i></a>
-              </div>
-            </div><!-- End Article -->
-    
-            <!-- Article 3 -->
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-conservation">
-              <img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Saving Endangered Sea Turtles</h4>
-                <p>Discover efforts to protect sea turtles from extinction.</p>
-                <a href="assets/img/portfolio/app-1.jpg" title="The Hidden World of Coral Reefs" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="fas fa-share"></i></a>
-                <a href="{{ route('article') }}" title="The Hidden World of Coral Reefs" class="details-link"><i class="fas fa-ellipsis-h"></i></a>
-              </div>
-            </div><!-- End Article -->
-    
-            <!-- Article 4 -->
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cleanup">
-              <img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Beach Cleanups: Do They Really Help?</h4>
-                <p>How small cleanup actions can make a big impact on our environment.</p>
-                <a href="assets/img/portfolio/app-1.jpg" title="The Hidden World of Coral Reefs" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="fas fa-share"></i></a>
-                <a href="{{ route('article') }}" title="The Hidden World of Coral Reefs" class="details-link"><i class="fas fa-ellipsis-h"></i></a>
-              </div>
-            </div><!-- End Article -->
-    
-            <!-- Article 6 -->
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-marine">
-              <img src="assets/img/portfolio/product-2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Fascinating Deep-Sea Creatures</h4>
-                <p>Meet some of the most unique creatures living in the deep ocean.</p>
-                <a href="assets/img/portfolio/app-1.jpg" title="The Hidden World of Coral Reefs" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="fas fa-share"></i></a>
-                <a href="{{ route('article') }}" title="The Hidden World of Coral Reefs" class="details-link"><i class="fas fa-ellipsis-h"></i></a>
-              </div>
-            </div><!-- End Article -->
-    
-            <!-- Article 8 -->
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-cleanup">
-              <img src="assets/img/portfolio/books-2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>How to Organize a Cleanup Event</h4>
-                <p>Step-by-step guide to organizing a successful beach or ocean cleanup.</p>
-                <a href="assets/img/portfolio/app-1.jpg" title="The Hidden World of Coral Reefs" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="fas fa-share"></i></a>
-                <a href="{{ route('article') }}" title="The Hidden World of Coral Reefs" class="details-link"><i class="fas fa-ellipsis-h"></i></a>
-              </div>
-            </div><!-- End Article -->
-    
-          </div><!-- End Articles Container -->
-    
-        </div>
-    
-      </div>
-    </section>
+    </div><!-- End Articles Container -->
+
+    </div>
+
+  </div>
+</section>
     
     
         <!-- About Section -->

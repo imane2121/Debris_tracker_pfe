@@ -81,7 +81,7 @@
     <section style="display: flex; justify-content: center; align-items: center;" id="starter-section" class="starter-section section">
       <div class="signContainer">
         <div class="heading">Sign Up</div>
-        <form method="POST" action="{{url('signUp')}}" class="form">
+        <form method="POST" action="" class="form">
           @csrf
           <input required class="input" type="text" name="first_name" id="first_name" placeholder="First Name">
           <input required class="input" type="text" name="last_name" id="last_name" placeholder="Last Name">
@@ -105,9 +105,9 @@
 
             </select>
             <label for="organization_card">Provide the front of your organization card</label>
-            <input class="input" type="file" name="front_organization_card" id="organization_card" required>
+            <input class="input" type="file" name="front_organization_card" id="front_organization_card" required>
             <label for="organization_card">Provide the back of your organization card</label>
-            <input class="input" type="file" name="back_organization_card" id="organization_card" required>
+            <input class="input" type="file" name="back_organization_card" id="back_organization_card" required>
           </div>
           
           <input required class="input" type="password" name="password" id="password" placeholder="Password">

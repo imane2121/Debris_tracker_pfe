@@ -82,7 +82,7 @@
 
         <div class="signContainer">
             <div class="heading">Sign In</div>
-            <form action="{{url('signInWithUsername')}}" method="POST" class="form">
+            <form action="" method="POST" class="form">
               @csrf
                 <span class="agreement"><a href="{{ route('signInWithEmail') }}">Sign In with email instead?</a></span>
               <input required="" class="input" type="text" name="username" id="username" placeholder="Username">

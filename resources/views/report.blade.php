@@ -83,7 +83,7 @@
             <h2>Help Us Tackle Marine Pollution</h2>
             <p>Few Steps to Cleaner Seas</p>
           </div><!-- End Section Title -->
-          <form id="trash-report-form">
+          <form id="trash-report-form" action="" method="POST">
             <!-- Location Field-->
             <div class="form-group">
               <label for="location">Your Location</label>
