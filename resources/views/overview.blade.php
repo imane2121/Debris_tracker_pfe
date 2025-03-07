@@ -42,7 +42,6 @@
 </head>
 
 <body class="index-page">
-
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
@@ -63,10 +62,12 @@
       </nav>
 
     </div>
+
+
   </header>
 
   <main class="main">
-
+  
     <!-- Hero Section -->
     <section id="hero" class="hero section accent-background">
 
@@ -79,6 +80,232 @@
       </div>
 
     </section><!-- /Hero Section -->
+
+    <section class="collectes-container">
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+          <h2>Upcoming Collectes</h2>
+          <p>Stay tuned! Volunteer now to clean our beaches and protect marine life. Every effort counts—be part of the change! </p>
+      </div><!-- End Section Title -->
+  
+      <!-- Swiper Carousel -->
+      <div class="container">
+          <div class="swiper collectesSwiper">
+              <div class="swiper-wrapper">
+                  @foreach ($collectes as $collecte)
+                      <div class="swiper-slide">
+                          <div class="collecte-card">
+                              <div class="collecte-image">
+                                  @if ($collecte->image)
+                                      <img src="{{ asset('assets/img/collectes/' . $collecte->image) }}" alt="Collecte Location">
+                                  @else
+                                      <img src="{{ asset('assets/img/collectes/default.png') }}" alt="No Image">
+                                  @endif
+                                  <div class="icon-buttons">
+                                      <button class="icon-button expand-button" title="See More" data-bs-toggle="modal" data-bs-target="#collecteModal{{ $collecte->id }}">
+                                          <i class="fas fa-expand-alt"></i>
+                                      </button>
+                                      <div class="share-container">
+                                          <button class="icon-button share-button" title="Share">
+                                              <i class="fas fa-share-alt"></i>
+                                          </button>
+                                          <div class="share-popup">
+                                              <div class="share-icon facebook" title="Share on Facebook">
+                                                  <i class="fab fa-facebook-f"></i>
+                                              </div>
+                                              <div class="share-icon twitter" title="Share on Twitter">
+                                                  <i class="fab fa-twitter"></i>
+                                              </div>
+                                              <div class="share-icon instagram" title="Share on Instagram">
+                                                  <i class="fab fa-instagram"></i>
+                                              </div>
+                                              <div class="share-icon pinterest" title="Share on Pinterest">
+                                                  <i class="fab fa-pinterest-p"></i>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="collecte-info">
+                                  <h2 class="collecte-location">{{ $collecte->region }}</h2>
+                                  <p class="collecte-description">
+                                      {{ Str::limit($collecte->description, 100) }}
+                                  </p>
+                                  <div class="collecte-stats">
+                                      <div class="stat">
+                                          <i class="fas fa-users"></i>
+                                          <span>10 / {{ $collecte->nbrContributors }} Volunteers</span>
+                                      </div>
+                                      <div class="stat">
+                                          <i class="fas fa-calendar-alt"></i>
+                                          <span>{{ $collecte->starting_date->format('F j, Y') }}</span>
+                                      </div>
+                                  </div>
+                                  <div class="collecte-actions">
+                                      <a href="{{ route('signInWithEmail') }}" class="collecte-button volunteer-button">Volunteer</a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  @endforeach
+              </div>
+              <div class="swiper-pagination"></div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Collecte Details Modals -->
+  @foreach ($collectes as $collecte)
+  <div class="modal fade" id="collecteModal{{ $collecte->id }}" tabindex="-1" aria-labelledby="collecteModalLabel{{ $collecte->id }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <button type="button" class="modal-close" data-bs-dismiss="modal" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="modal-body">
+          <div class="collecte-modal-image">
+            @if ($collecte->image)
+              <img src="{{ asset('assets/img/collectes/' . $collecte->image) }}" alt="Collecte Location">
+            @else
+              <img src="{{ asset('assets/img/collectes/default.png') }}" alt="No Image">
+            @endif
+            <div class="collecte-modal-title">
+              <h5>{{ $collecte->region }}</h5>
+              @if($collecte->signal && $collecte->signal->wasteTypes)
+                <div class="waste-types">
+                  @foreach($collecte->signal->getWasteTypeNames() as $wasteTypeName)
+                    <span class="waste-type-badge">{{ $wasteTypeName }}</span>
+                  @endforeach
+                </div>
+              @endif
+            </div>
+          </div>
+          <div class="collecte-modal-content">
+            <div class="collecte-modal-description">
+              <h6>About This Collecte</h6>
+              <p>{{ $collecte->description }}</p>
+            </div>
+            <div class="collecte-modal-details">
+              <div class="detail-item">
+                <i class="fas fa-users"></i>
+                <div>
+                  <h6>Volunteers</h6>
+                  <p>10 / {{ $collecte->nbrContributors }} Volunteers</p>
+                </div>
+              </div>
+              <div class="detail-item">
+                <i class="fas fa-calendar-alt"></i>
+                <div>
+                  <h6>Date & Time</h6>
+                  <p>{{ $collecte->starting_date->format('F j, Y') }} at {{ $collecte->starting_date->format('h:i A') }}</p>
+                </div>
+              </div>
+              <div class="detail-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                  <h6>Location</h6>
+                  <p>{{ $collecte->location }}</p>
+                </div>
+              </div>
+              @if($collecte->signal)
+                <div class="detail-item">
+                  <i class="fas fa-weight"></i>
+                  <div>
+                    <h6>Estimated Volume</h6>
+                    <p>{{ $collecte->signal->volume }} kg</p>
+                  </div>
+                </div>
+              @endif
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="{{ route('signInWithEmail') }}" class="volunteer-button">Volunteer Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  @endforeach
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        new Swiper('.collectesSwiper', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            loop: true,
+            speed: 2000,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            effect: 'slide',
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            // Enable touch swiping
+            simulateTouch: true,
+            touchRatio: 1,
+            touchAngle: 45,
+            grabCursor: true,
+            breakpoints: {
+                320: {
+                    slidesPerView: 1,
+                    spaceBetween: 20
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 20
+                },
+                1200: {
+                    slidesPerView: 3,
+                    spaceBetween: 30
+                }
+            }
+        });
+
+        // Share popup functionality
+        const shareButtons = document.querySelectorAll('.share-button');
+        const sharePopups = document.querySelectorAll('.share-popup');
+
+        shareButtons.forEach((button, index) => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                // Close all other popups
+                sharePopups.forEach((popup, i) => {
+                    if (i !== index) popup.classList.remove('active');
+                });
+                // Toggle current popup
+                sharePopups[index].classList.toggle('active');
+            });
+        });
+
+        // Close share popup when clicking outside
+        document.addEventListener('click', () => {
+            sharePopups.forEach(popup => popup.classList.remove('active'));
+        });
+    });
+  </script>
+
+    <!-- Call To Action Section -->
+    <section id="call-to-action" class="call-to-action section accent-background">
+
+      <img src="assets/img/cta-bg.jpg" alt="Protect Our Oceans">
+
+      <div class="container">
+        <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
+          <div class="col-xl-10">
+            <div class="text-center">
+              <h3>Protect Our Oceans, One Action at a Time</h3>
+              <p>Every year, millions of tons of trash pollute our seas, harming marine life. Join us in cleaning up and making a real impact for a cleaner, healthier ocean!</p>
+              <a class="cta-btn" href="{{ route('signInWithEmail') }}">Join the Cleanup</a>
+              <a class="cta-btn" href="{{ route('signInWithEmail') }}">Report Marine Trash</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section><!-- /Call To Action Section -->
 
 <!-- Articles Section -->
 <section id="articles" class="portfolio section">
@@ -138,7 +365,7 @@
 
 
     <!-- About Section -->
-    <section id="about" class="about section">
+    <section id="about" class="about section  light-background">
 
       <div class="container">
 
@@ -195,16 +422,15 @@
     <section id="cartography" class="about section">
       <div class="container section-title" data-aos="fade-up">
           <h2>Cartography</h2>
-          <p>Heatmap of collectes based on signal locations.</p>
+          <p></p>
       </div>    
       <div class="map-container">
           <div id="map" class="map-box"></div>
       </div>
   </section>
   
-  <!-- Leaflet JS & Heatmap Plugin -->
+  <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
   
   <script>
       // Initialize the map, centered on Moroccan seas
@@ -221,84 +447,49 @@
       // Debug the locations data
       console.log('Locations:', locations);
   
-      // Prepare heatmap data
-      var heatmapData = locations.map(function(location) {
-          return [
-              parseFloat(location.latitude), // Convert latitude to number
-              parseFloat(location.longitude), // Convert longitude to number
-              1.0 // Intensity (can be adjusted based on your needs)
-          ];
+      // Define custom icons for upcoming and completed collectes
+      var upcomingIcon = L.icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png', // Red marker icon          iconSize: [25, 41], // Size of the icon
+          iconAnchor: [12, 41], // Point of the icon that corresponds to the marker's location
+          popupAnchor: [1, -34] // Point from which the popup should open relative to the iconAnchor
       });
   
-      // Debug the heatmap data
-      console.log('Heatmap Data:', heatmapData);
+      var completedIcon = L.icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png', // Red marker icon          iconSize: [25, 41], // Size of the icon
+          iconAnchor: [12, 41], // Point of the icon that corresponds to the marker's location
+          popupAnchor: [1, -34] // Point from which the popup should open relative to the iconAnchor
+      });
   
-      // Add heatmap layer
-      if (heatmapData.length > 0) {
-          L.heatLayer(heatmapData, { radius: 25, blur: 20, maxZoom: 10 }).addTo(map);
+      // Add markers for each location
+      if (locations.length > 0) {
+          locations.forEach(function(location) {
+              // Determine if the collecte is upcoming or completed
+              var collecteDate = new Date(location.starting_date); // Convert starting_date to a Date object
+              var isUpcoming = collecteDate > new Date(); // Check if the date is in the future
+  
+              // Choose the icon based on the collecte status
+              var icon = isUpcoming ? upcomingIcon : completedIcon;
+  
+              // Create a marker for each location
+              var marker = L.marker([
+                  parseFloat(location.latitude), // Convert latitude to number
+                  parseFloat(location.longitude) // Convert longitude to number
+              ], { icon: icon }).addTo(map);
+  
+              // Add a popup to the marker
+              marker.bindPopup(`
+                  <b>Location:</b> ${location.latitude}, ${location.longitude}<br>
+                  <b>Volume:</b> ${location.volume}<br>
+                  <b>Status:</b> ${isUpcoming ? 'Upcoming' : 'Completed'}<br>
+                  <b>Date:</b> ${collecteDate.toLocaleDateString()}
+              `);
+          });
       } else {
-          console.error('No heatmap data available.');
+          console.error('No location data available.');
+          alert('No validated collectes found.'); // Notify the user
       }
   </script>
   
-
-
-    <!-- Services Section -->
-    <section id="services" class="services section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Services</h2>
-        <p>Discover how our platform helps combat marine pollution effectively</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <!-- Service Item 1: Trash Reporting -->
-          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item position-relative">
-              <div class="icon"><i class="bi bi-camera"></i></div>
-              <h4><a href="" class="stretched-link">Trash Reporting</a></h4>
-              <p>Users report marine debris by uploading images, providing geolocation, and describing the type of waste to identify pollution hotspots.</p>
-            </div>
-          </div><!-- End Service Item -->
-
-          <!-- Service Item 2: Data Analysis -->
-          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item position-relative">
-              <div class="icon"><i class="bi bi-graph-up"></i></div>
-              <h4><a href="" class="stretched-link">Data Analysis</a></h4>
-              <p>Advanced AI processes the reports to detect trends, generate heatmaps, and identify areas requiring immediate action.</p>
-            </div>
-          </div><!-- End Service Item -->
-
-          <!-- Service Item 3: Organizing Cleanup Operations -->
-          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item position-relative">
-              <div class="icon"><i class="bi bi-people"></i></div>
-              <h4><a href="" class="stretched-link">Organizing Cleanups</a></h4>
-              <p>We coordinate cleanup efforts by mobilizing volunteers and local organizations to efficiently address identified pollution zones.</p>
-            </div>
-          </div><!-- End Service Item -->
-
-          <!-- Service Item 4: On-Site Waste Collection -->
-          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item position-relative">
-              <div class="icon"><i class="bi bi-recycle"></i></div>
-              <h4><a href="" class="stretched-link">On-Site Waste Collection</a></h4>
-              <p>Teams equipped with tools collect, sort, and properly dispose of waste, ensuring minimal environmental impact.</p>
-            </div>
-          </div><!-- End Service Item -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Services Section -->
-
-
         <!-- Stats Section -->
     <section id="stats" class="stats section light-background">
 
@@ -344,99 +535,8 @@
 
     </section><!-- /Stats Section -->
 
-
-    <!-- Call To Action Section -->
-    <section id="call-to-action" class="call-to-action section accent-background">
-
-      <img src="assets/img/cta-bg.jpg" alt="Protect Our Oceans">
-
-      <div class="container">
-        <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
-          <div class="col-xl-10">
-            <div class="text-center">
-              <h3>Protect Our Oceans, One Action at a Time</h3>
-              <p>Every year, millions of tons of trash pollute our seas, harming marine life. Join us in cleaning up and making a real impact for a cleaner, healthier ocean!</p>
-              <a class="cta-btn" href="{{ route('signInWithEmail') }}">Join the Cleanup</a>
-              <a class="cta-btn" href="{{ route('signInWithEmail') }}">Report Marine Trash</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </section><!-- /Call To Action Section -->
-
- 
-      <!--<section class="property" id="property">
-        <div class="container">
-
-          <p class="section-subtitle">Properties</p>
-
-          <h2 class="h2 section-title">Featured Listings</h2>
-
-          <ul class="property-list has-scrollbar">
-
-              <div class="property-card">
-
-                <figure class="card-banner">
-
-                  <a href="#">
-
-                  </a>
- 
-                  <div class="card-badge </div>
-
-                  <div class="banner-actions">
-
-                    <button class="banner-actions-btn">
-                      <ion-icon name="location"></ion-icon>
-
-                      <address></address>
-                    </button>
-
-                    <button class="banner-actions-btn">
-                      <ion-icon name="camera"></ion-icon>
-
-                      <span></span>
-                    </button>
-
-                  </div>
-
-                </figure>
-
-                <div class="card-content">
-
-                  <h3 class="h3 card-title">
-                    <a href="#"></a>
-                  </h3>
-
-                  <p class="card-text">desc                  </p>
-
-                </div>
-
-                <div class="card-footer">
-
-
-
-                  <div class="card-footer-actions">
-
-                    <button class="card-footer-actions-btn">
-                      <a href="login.php"><ion-icon name="resize-outline"></ion-icon></a>
-                    </button>
-
-                  </div>
-
-                </div>
-              </div>
-            </li>
-
-
-          </ul>
-
-        </div>
-      </section>-->
-
         <!-- Faq Section -->
-    <section id="faq" class="faq section light-background">
+    <section id="faq" class="faq section">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
@@ -453,7 +553,7 @@
           </div>
           <div class="col-lg-7">
             <p>
-              You can report marine trash by submitting details and images through our platform. Just click on “Report Trash,” provide the location and description, and our community will take action!
+              You can report marine trash by submitting details and images through our platform. Just click on "Report Trash," provide the location and description, and our community will take action!
             </p>
           </div>
         </div><!-- End F.A.Q Item-->
@@ -465,7 +565,7 @@
           </div>
           <div class="col-lg-7">
             <p>
-              Anyone! Whether you’re an individual, an organization, or a group of volunteers, you can join cleanup efforts near you. Check our map to find or start a cleanup mission.
+              Anyone! Whether you're an individual, an organization, or a group of volunteers, you can join cleanup efforts near you. Check our map to find or start a cleanup mission.
             </p>
           </div>
         </div><!-- End F.A.Q Item-->
@@ -512,7 +612,7 @@
 
 
     <!-- Contact Section -->
-    <section id="contact" class="contact section">
+    <section id="contact" class="contact section  light-background">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">

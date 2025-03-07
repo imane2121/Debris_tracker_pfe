@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CollecteController;
+use App\Http\Controllers\SignalController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,35 +18,35 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-// Define the routes in Laravel 5 style
-Route::get('/home', [HomeController::class, 'home'])->name('home');
+// Default route
+Route::get('/', [HomeController::class, 'overview'])->name('overview');
 Route::get('/overview', [HomeController::class, 'overview'])->name('overview');
+
+// Auth routes
 Route::get('/signInWithEmail', [HomeController::class, 'signInWithEmail'])->name('signInWithEmail');
 Route::get('/signInWithUsername', [HomeController::class, 'signInWithUsername'])->name('signInWithUsername');
-Route::post('/signUp', [HomeController::class, 'signUp'])->name('signUp');
-Route::get('/signUp', [HomeController::class, 'signUp'])->name('signUp');
-Route::post('/signUp', [HomeController::class, 'signUpPost'])->name('signUpPost');
+Route::get('/signUp', [AuthController::class, 'showSignUpForm'])->name('signUp');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/login/email', [AuthController::class, 'loginWithEmail'])->name('login.email');
+Route::post('/login/username', [AuthController::class, 'loginWithUsername'])->name('login.username');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Home routes
 Route::get('/article', [HomeController::class, 'article'])->name('article');
-Route::get('/contributerHome', [HomeController::class, 'contributerHome'])->name('contributerHome');
-Route::get('/report', [HomeController::class, 'report'])->name('report');
-Route::get('/collectes', [HomeController::class, 'collectes'])->name('collectes');
-Route::get('/account', [HomeController::class, 'account'])->name('account');
-use App\Http\Controllers\ArticleController;
-
-Route::get('/overview', [ArticleController::class, 'overview']);
-Route::get('/article/{id}', [ArticleController::class, 'show'])->name('article');
-// Define the overview route
-Route::get('/overview', [ArticleController::class, 'overview'])->name('overview');
-
-Route::get('/contributerHome', [ArticleController::class, 'contributerHome']);
-// Define the overview route
 Route::get('/contributerHome', [ArticleController::class, 'contributerHome'])->name('contributerHome');
+Route::get('/report', [HomeController::class, 'report'])->name('report');
+Route::get('/account', [HomeController::class, 'account'])->name('account');
 
-use App\Http\Controllers\CollecteController;
+// Article routes
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
+Route::get('/contributer/home', [ArticleController::class, 'contributerHome'])->name('articles.contributerHome');
 
-Route::get('/collectes', [CollecteController::class, 'index']);
-
-use App\Http\Controllers\SignalController;
+// Collecte routes
+Route::get('/collectes', [CollecteController::class, 'index'])->name('collectes.index');
+Route::get('/collectes/overview', [CollecteController::class, 'overview'])->name('collectes.overview');
+Route::get('/supervisorDashboard', [CollecteController::class, 'supervisorDashboard'])->name('supervisor.dashboard');
+Route::post('/collecte/store', [CollecteController::class, 'storeCollecte'])->name('store.collecte');
 
 // Signal routes
 Route::get('/signals', [SignalController::class, 'index'])->name('signals.index');

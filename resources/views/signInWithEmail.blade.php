@@ -33,7 +33,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="{{ route('overview') }}" class="logo d-flex align-items-center">
+      <a href="{{ route('collectes.overview') }}" class="logo d-flex align-items-center">
         <img src="assets/img/apple-touch-icon.png" alt="">
         <h1 class="sitename">AquaScan</h1>
       </a>
@@ -82,16 +82,36 @@
 
       <div class="signContainer">
         <div class="heading">Sign In</div>
-        <form action="" method="POST" class="form">
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        <form action="{{ route('login.email') }}" method="POST" class="form">
           @csrf
           <span class="agreement"><a href="{{ route('signInWithUsername') }}">Sign In with username instead?</a></span>
-          <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
-          <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
+          <input required="" class="input @error('email') is-invalid @enderror" type="email" name="email" id="email" placeholder="E-mail" value="{{ old('email') }}">
+          @error('email')
+              <div class="invalid-feedback">
+                  {{ $message }}
+              </div>
+          @enderror
+          <input required="" class="input @error('password') is-invalid @enderror" type="password" name="password" id="password" placeholder="Password">
+          @error('password')
+              <div class="invalid-feedback">
+                  {{ $message }}
+              </div>
+          @enderror
           <span class="agreement"><a href="#">Forgot Password ?</a></span>
-          <input class="login-button" type="submit" value="Sign In">
+          <button type="submit" class="login-button">Sign In</button>
           <div class="agreement">
             <a href="{{ route('signUp') }}">Sign Up</a> if you don't have an account.
-        </div>
+          </div>
         </form>
       </div>
 
@@ -104,7 +124,7 @@
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
-          <a href="{{ route('overview') }}" class="logo d-flex align-items-center">
+          <a href="{{ route('collectes.overview') }}" class="logo d-flex align-items-center">
             <span class="sitename">AquaScan</span>
           </a>
           <div class="footer-contact pt-3">
@@ -124,7 +144,7 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li><a href="{{ route('overview') }}">Home</a></li>
+            <li><a href="{{ route('collectes.overview') }}">Home</a></li>
             <li><a href="#">About us</a></li>
             <li><a href="#">Services</a></li>
             <li><a href="#">Terms of service</a></li>
@@ -170,6 +190,33 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <style>
+  .alert {
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+  }
+  .alert-danger {
+      color: #721c24;
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+  }
+  .alert-success {
+      color: #155724;
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+  }
+  .is-invalid {
+      border-color: #dc3545 !important;
+  }
+  .invalid-feedback {
+      color: #dc3545;
+      font-size: 0.875em;
+      margin-top: 0.25rem;
+  }
+  </style>
 
 </body>
 

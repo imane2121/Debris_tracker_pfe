@@ -10,6 +10,7 @@
   <style>
     body {
       background-color: #f8f9fa;
+      font-family: 'Lato', sans-serif;
     }
     .navbar {
       margin-bottom: 20px;
@@ -84,7 +85,7 @@
 </head>
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #051c41;">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Marine Waste Collection</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -175,5 +176,13 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function confirmLogout(event) {
+      event.preventDefault();
+      if (confirm('Are you sure you want to log out?')) {
+        document.getElementById('logoutForm').submit();
+      }
+    }
+  </script>
 </body>
 </html>

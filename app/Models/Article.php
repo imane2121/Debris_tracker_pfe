@@ -23,4 +23,5 @@ class Article extends Model
     // Cast 'published_at' as a date
     protected $casts = [
         'published_at' => 'datetime',
-    ];}
+    ];
+    }

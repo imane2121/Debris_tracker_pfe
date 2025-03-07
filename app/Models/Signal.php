@@ -3,9 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Signal extends Model
@@ -26,15 +23,18 @@ class Signal extends Model
         'status',
     ];
 
+    // Define a method to get waste types
+    public function getWasteTypes()
+    {
+        $wasteTypeIds = json_decode($this->wasteTypes, true) ?? [];
+        return WasteType::whereIn('id', $wasteTypeIds)->get();
+    }
+
     // Define a method to get waste type names
     public function getWasteTypeNames()
     {
-        // Decode the JSON field
-        $wasteTypeIds = json_decode($this->wasteTypes, true);
-
-        // Fetch the waste types with their parent types
-        $wasteTypes = WasteType::whereIn('id', $wasteTypeIds)->get();
-
+        $wasteTypes = $this->getWasteTypes();
+        
         // Combine parent and child names
         $result = [];
         foreach ($wasteTypes as $wasteType) {
@@ -51,5 +51,9 @@ class Signal extends Model
         return $result;
     }
 
+    public function collectes()
+    {
+        return $this->hasMany(Collecte::class);
+    }
 }
 

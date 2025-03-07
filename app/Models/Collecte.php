@@ -19,6 +19,7 @@ class Collecte extends Model
         'status',
         'starting_date',
         'end_date',
+        'nbrContributors',
     ];
 
     // Cast starting_date and end_date as datetime
@@ -26,4 +27,16 @@ class Collecte extends Model
         'starting_date' => 'datetime',
         'end_date' => 'datetime',
     ];
+
+    // Define the relationship with Signal
+    public function signal()
+    {
+        return $this->belongsTo(Signal::class);
+    }
+
+    // Get waste types through the signal relationship
+    public function getWasteTypeNames()
+    {
+        return $this->signal ? $this->signal->getWasteTypeNames() : [];
+    }
 }

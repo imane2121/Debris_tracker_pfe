@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contributor extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
-        'fullName', 'email', 'phoneNumber', 'password', 'username', 
+        'firstName', 'lastName', 'email', 'phoneNumber', 'password', 'username', 
         'accountStatus', 'profilePicture', 'credibilityScore'
     ];
 

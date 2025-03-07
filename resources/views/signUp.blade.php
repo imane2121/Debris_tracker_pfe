@@ -81,37 +81,79 @@
     <section style="display: flex; justify-content: center; align-items: center;" id="starter-section" class="starter-section section">
       <div class="signContainer">
         <div class="heading">Sign Up</div>
-        <form method="POST" action="" class="form">
+        @if(session('error'))
+          <div class="alert alert-danger">
+            {{ session('error') }}
+          </div>
+        @endif
+
+        @if ($errors->any())
+          <div class="alert alert-danger">
+            <ul>
+              @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+        @endif
+
+        <form method="POST" action="{{ route('register') }}" class="form" enctype="multipart/form-data">
           @csrf
-          <input required class="input" type="text" name="first_name" id="first_name" placeholder="First Name">
-          <input required class="input" type="text" name="last_name" id="last_name" placeholder="Last Name">
-          <input required class="input" type="text" name="username" id="username" placeholder="Username">
-          <input required class="input" type="email" name="email" id="email" placeholder="E-mail">
+          <input required class="input @error('first_name') is-invalid @enderror" 
+                 type="text" name="first_name" id="first_name" 
+                 placeholder="First Name" value="{{ old('first_name') }}">
+
+          <input required class="input @error('last_name') is-invalid @enderror" 
+                 type="text" name="last_name" id="last_name" 
+                 placeholder="Last Name" value="{{ old('last_name') }}">
+
+          <input required class="input @error('username') is-invalid @enderror" 
+                 type="text" name="username" id="username" 
+                 placeholder="Username" value="{{ old('username') }}">
+
+          <input required class="input @error('email') is-invalid @enderror" 
+                 type="email" name="email" id="email" 
+                 placeholder="E-mail" value="{{ old('email') }}">
           
           <!-- Role Selection -->
           <label for="role">Choose your role:</label>
-          <select id="role" class="input" required>
-            <option value="contributor">Contributor - Report and track marine waste</option>
-            <option value="supervisor">Collection Supervisor - Manage cleanup operations</option>
+          <select id="role" name="role" class="input @error('role') is-invalid @enderror" required>
+            <option value="contributor" {{ old('role') == 'contributor' ? 'selected' : '' }}>
+              Contributor - Report and track marine waste
+            </option>
+            <option value="supervisor" {{ old('role') == 'supervisor' ? 'selected' : '' }}>
+              Collection Supervisor - Manage cleanup operations
+            </option>
           </select>
           
           <!-- Additional Inputs for Collection Supervisor -->
           <div id="supervisor-fields" style="display: none;">
-            <select class="input" name="organization" id="organization" placeholder="Background Organization">
-              <option value="" disabled selected>Select Organization</option>
-              <option value="org1"> WWF (World Wide Fund for Nature) </option>
-              <option value="org2"> Greenpeace </option>
-              <option value="org3"> The Ocean Cleanup </option>
-
+            <select class="input @error('organization') is-invalid @enderror" 
+                    name="organisation_id" id="organization">
+              <option value="" disabled {{ old('organisation_id') ? '' : 'selected' }}>Select Organization</option>
+              @foreach($organisations as $organisation)
+                <option value="{{ $organisation->id }}" {{ old('organisation_id') == $organisation->id ? 'selected' : '' }}>
+                  {{ $organisation->name }}
+                </option>
+              @endforeach
             </select>
-            <label for="organization_card">Provide the front of your organization card</label>
-            <input class="input" type="file" name="front_organization_card" id="front_organization_card" required>
-            <label for="organization_card">Provide the back of your organization card</label>
-            <input class="input" type="file" name="back_organization_card" id="back_organization_card" required>
+
+            <label for="front_organization_card">Provide the front of your organization card</label>
+            <input class="input @error('front_organization_card') is-invalid @enderror" 
+                   type="file" name="front_organization_card" id="front_organization_card">
+
+            <label for="back_organization_card">Provide the back of your organization card</label>
+            <input class="input @error('back_organization_card') is-invalid @enderror" 
+                   type="file" name="back_organization_card" id="back_organization_card">
           </div>
           
-          <input required class="input" type="password" name="password" id="password" placeholder="Password">
-          <input required class="input" type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password">
+          <input required class="input @error('password') is-invalid @enderror" 
+                 type="password" name="password" id="password" 
+                 placeholder="Password">
+
+          <input required class="input @error('password_confirmation') is-invalid @enderror" 
+                 type="password" name="password_confirmation" id="password_confirmation" 
+                 placeholder="Confirm Password">
           
           <div class="agreement">
             By signing up, you agree to our <a href="#">Terms & Conditions</a>.
@@ -125,9 +167,30 @@
     </section>
     
     <script>
-      document.getElementById('role').addEventListener('change', function () {
+      // Show/hide supervisor fields based on role selection
+      document.getElementById('role').addEventListener('change', function() {
         let supervisorFields = document.getElementById('supervisor-fields');
-        supervisorFields.style.display = this.value === 'supervisor' ? 'block' : 'none';
+        if (this.value === 'supervisor') {
+          supervisorFields.style.display = 'block';
+          // Make supervisor fields required
+          document.getElementById('organization').required = true;
+          document.getElementById('front_organization_card').required = true;
+          document.getElementById('back_organization_card').required = true;
+        } else {
+          supervisorFields.style.display = 'none';
+          // Make supervisor fields not required
+          document.getElementById('organization').required = false;
+          document.getElementById('front_organization_card').required = false;
+          document.getElementById('back_organization_card').required = false;
+        }
+      });
+
+      // Show supervisor fields on page load if supervisor role is selected
+      window.addEventListener('load', function() {
+        let role = document.getElementById('role');
+        if (role.value === 'supervisor') {
+          document.getElementById('supervisor-fields').style.display = 'block';
+        }
       });
     </script>
     
@@ -160,8 +223,8 @@
           <h4>Useful Links</h4>
           <ul>
             <li><a href="{{ route('overview') }}">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
+            <li><a href="{{ route('overview') }}#about">About us</a></li>
+            <li><a href="{{ route('overview') }}#services">Services</a></li>
             <li><a href="#">Terms of service</a></li>
             <li><a href="#">Privacy policy</a></li>
           </ul>
